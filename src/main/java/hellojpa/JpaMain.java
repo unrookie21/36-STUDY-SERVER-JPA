@@ -25,7 +25,71 @@ public class JpaMain {
 
         try {
 
-//            Member findMember = em.find(Member.class, 1L);
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setAddress(new Address("homeCity", "street", "10000"));
+
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("족발");
+            member.getFavoriteFoods().add("피자 맛있겠다");
+
+            member.getAddressHistory().add(new Address("old1", "street" , "10000"));
+            member.getAddressHistory().add(new Address("old2", "street" , "10000"));
+
+            em.persist(member);
+
+            //homecity -> newcity
+            // member.setAddress(new Address("newCity", ~~ ~~ ));
+
+            // 치킨을 한식으로 바꾸고 싶음
+            member.getFavoriteFoods().remove("치킨");
+            member.getFavoriteFoods().add("한식");
+
+            member.getAddressHistory().remove(new Address("old1", "street", "10000"));
+            member.getAddressHistory().add(new Address("new1", "street", "10000"));
+
+
+            // Member member = new Member();
+            // member.setAddress(address);
+            //
+            // Member member2 = new Member();
+            // member2.setAddress(address);
+            //
+            // member.getAddress().setCity("newCity");
+
+
+            Child child1 = new Child();
+            Child child2 = new Child();
+
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            em.persist(parent);
+            em.persist(child1);
+            em.persist(child2);
+
+            Member member1= new Member();
+            member1.setUsername("member1");
+            em.persist(member1);
+
+            Member member2= new Member();
+            member1.setUsername("member2");
+            em.persist(member2);
+
+            em.flush();
+            em.clear();
+
+            Member m1 = em.find(Member.class, member1.getId());
+            // m1.getClass 출력해보면 Member 나옴
+            // 이상황에서,
+            Member reference = em.getReference(Member.class, member1.getId());
+            // reference.getClass 하면?
+            Member m2 = em.find(Member.class, member2.getId());
+
+            System.out.println(m1.getClass() == m2.getClass());
+
+            //            Member findMember = em.find(Member.class, 1L);
 //            findMember.setName("hellojpa");
 //
 //            List<Member> result = em.createQuery("select m from Member m", Member.class)
