@@ -91,6 +91,8 @@ public class Member extends BaseEntity {
     private Team team;
 
 
+    private Integer age;
+
     //기간
     @Embedded
     private Period period;
@@ -106,9 +108,9 @@ public class Member extends BaseEntity {
     private List<Address> addressHistory = new ArrayList<>();
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "MEMBER_ID")
-    private List<AddressEntity> addressHistory = new ArrayList<>();
+    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JoinColumn(name = "MEMBER_ID")
+    // private List<AddressEntity> addressHistory = new ArrayList<>();
 
     @Column(name = "name")
     private String name;
