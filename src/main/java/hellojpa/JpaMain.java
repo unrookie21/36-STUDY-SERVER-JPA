@@ -30,6 +30,13 @@ public class JpaMain {
             member.setAge(10);
             em.persist(member);
 
+            List<Member> result = em.createNamedQuery("Member.findByUsername", Member.class)
+                .setParameter("name", "회원1")
+                .getResultList();
+
+            em.createQuery("update Member m set m.age = 20")
+                .executeUpdate();
+
             // String query =
             //     "select case when m.age <=10 then '학생요금'"
             //         + "when m.age >= 60 then '경로요금'"
